@@ -1,10 +1,11 @@
+import NotFound from "@/app/not-found";
 import { products } from "@/app/product-data";
 import Image from "next/image";
 
 function productDetail({ params }: { params: { id: string } }) {
   const product = products.find((product) => product.id === params.id);
   if (!product) {
-    return <div>Product not found</div>;
+    return <NotFound />;
   }
   return (
     <>
