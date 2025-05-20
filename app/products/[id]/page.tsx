@@ -1,6 +1,5 @@
 import NotFound from "@/app/not-found";
 import { products } from "@/app/product-data";
-import Image from "next/image";
 
 function productDetail({ params }: { params: { id: string } }) {
   const product = products.find((product) => product.id === params.id);
@@ -8,21 +7,26 @@ function productDetail({ params }: { params: { id: string } }) {
     return <NotFound />;
   }
   return (
-    <>
-      <h1 className="text-2xl font-bold">{product.name}</h1>
-      <Image
-        src={"/" + product.imageUrl}
-        alt={product.name}
-        width={100}
-        height={100}
-        className="w-full h-48 object-cover rounded"
-      />
-      <p className="text-lg font-semibold">${product.price}</p>
-      <p>{product.description}</p>
-      <button className="bg-blue-500 text-white px-4 py-2 rounded">
-        Add to Cart
-      </button>
-    </>
+    <div className="container mx-auto p-8 flex flex-col md:flex-row">
+      <div className="md:w-1/2 mb-4 md:mb-0 md:mr-8">
+        <img
+          src={"/" + product.imageUrl}
+          alt={product.name}
+          width={100}
+          height={100}
+          className="w-full h-auto rounded-lg shadow-md"
+        />
+      </div>
+      <div className="md:w-1/2">
+        <h1 className="text-4xl font-bold mb-4">{product.name}</h1>
+        <p className="text-2xl text-gray-600 mb-6">${product.price}</p>
+        <h3 className="text-2xl font-semibold mb-2">Description</h3>
+        <p className="text-gray-700">{product.description}</p>
+        <button className="bg-blue-500 text-white px-4 py-2 rounded">
+          Add to Cart
+        </button>
+      </div>
+    </div>
   );
 }
 

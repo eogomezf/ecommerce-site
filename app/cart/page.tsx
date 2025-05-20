@@ -10,26 +10,24 @@ function CartPage() {
     (id) => products.find((product) => product.id === id)!
   );
   return (
-    <>
-      <h1>Shopping Cart</h1>
-      {cartProducts.map((product) => (
-        <Link
-          key={product.id}
-          href={`/products/${product.id}`}
-          className="flex items-center justify-between p-4 border-b"
-        >
-          {/* <img src={product.imageUrl} alt={product.name} className="w-16 h-16 object-cover" /> */}
-          <div className="flex-1 ml-4">
-            <h2 className="text-lg font-bold">{product.name}</h2>
-            <p>{product.description}</p>
-            <p className="text-lg font-semibold">${product.price}</p>
-          </div>
-          <button className="bg-red-500 text-white px-4 py-2 rounded">
-            Remove
-          </button>
-        </Link>
-      ))}
-    </>
+    <div className="container mx-auto p-8">
+      <h1 className="text-4xl font-bold mb-8">Shopping Cart</h1>
+
+      <ul className="space-y-4">
+        {cartProducts.map((product) => (
+          <li
+            key={product.id}
+            className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition duration-300"
+          >
+            <Link href={`/products/${product.id}`}>
+              <h2 className="text-xl font-semibold mb-2">{product.name}</h2>
+
+              <p className="text-gray-600">${product.price}</p>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
