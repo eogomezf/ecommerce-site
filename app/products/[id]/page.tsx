@@ -1,8 +1,13 @@
 import NotFound from "@/app/not-found";
-import { products } from "@/app/product-data";
+// import { products } from "@/app/product-data";
 
-function productDetail({ params }: { params: { id: string } }) {
-  const product = products.find((product) => product.id === params.id);
+async function productDetail({ params }: { params: { id: string } }) {
+  const response = await fetch(
+    `http://localhost:3000/api/products/${params.id}`
+  );
+
+  const product = await response.json();
+
   if (!product) {
     return <NotFound />;
   }
